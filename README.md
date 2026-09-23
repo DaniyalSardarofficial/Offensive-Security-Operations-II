@@ -1,139 +1,95 @@
-<p align="center">
-  <img src="attack_chain.jpg" alt="Operation Iron Raven — Attack Kill Chain" width="90%"/>
-</p>
-
-<h1 align="center">🦅 OPERATION IRON RAVEN</h1>
+# 🛡️ Offensive Security Operations II (CIP-A105)
+### Summative Competency Examination Portfolio · ICDFA Academy
 
 <p align="center">
-  <b>Offensive Security Operations II — CTF 1 Penetration Test Report</b><br/>
-  <sub>ICDFA Academy · CIP-A105 · Summative Competency Exam</sub>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Target-OPFOR--01-critical?style=flat-square" alt="Target"/>
-  <img src="https://img.shields.io/badge/Result-FULL_COMPROMISE-darkred?style=flat-square" alt="Result"/>
-  <img src="https://img.shields.io/badge/Flags-4%2F4_Captured-success?style=flat-square" alt="Flags"/>
-  <img src="https://img.shields.io/badge/Priv_Esc-www--data_→_root-blueviolet?style=flat-square" alt="Priv Esc"/>
-  <img src="https://img.shields.io/badge/Classification-Training_Use_Only-blue?style=flat-square" alt="Classification"/>
+  <img src="https://img.shields.io/badge/Student-Daniyal_Ahmed-blue?style=for-the-badge" alt="Student"/>
+  <img src="https://img.shields.io/badge/Reg_No-C11%2F26%2FEHIT%2F17331-navy?style=for-the-badge" alt="Reg No"/>
+  <img src="https://img.shields.io/badge/Course-CIP--A105-informational?style=for-the-badge" alt="Course"/>
+  <img src="https://img.shields.io/badge/Classification-Training_Use_Only-critical?style=for-the-badge" alt="Classification"/>
 </p>
 
 ---
 
-## 📋 Overview
+## 📌 Repository Overview
 
-This repository contains the complete deliverables for **Operation Iron Raven** — an authorised, black-box penetration test conducted against a standalone intentionally-vulnerable Linux server (**OPFOR-01**) as part of the ICDFA Offensive Security Operations II competency examination.
+This repository contains the complete, authoritative assessment deliverables for **Offensive Security Operations II (CIP-A105)** at the **ICDFA Academy**. 
 
-The engagement was executed entirely within an **isolated VMware Host-Only network** with no route to the public internet. All reconnaissance, enumeration, vulnerability research, exploitation, post-exploitation, privilege escalation, and flag recovery were performed independently in a single session.
-
-> **Outcome:** Total system compromise — from unauthenticated network access to full `root` shell — with all four mission flags recovered.
+The coursework entails two independent, black-box penetration testing operations conducted in strictly isolated virtual laboratory segments (VirtualBox / VMware Host-Only networks with zero internet routability). Each engagement progressed from unauthenticated host discovery to full administrative (`root`) system compromise, accompanied by comprehensive technical reporting, risk registers, executive briefings, and photographic evidence.
 
 ---
 
-## 🗂️ Repository Contents
+## ⚔️ Operations Matrix & Summary
 
-| # | File | Description |
-|:-:|:-----|:------------|
-| 📄 | [`Operation_Iron_Raven_Report.pdf`](Operation_Iron_Raven_Report.pdf) | **Main Technical Report** — 83-page report covering all 12 required sections: reconnaissance, enumeration, exploitation, post-exploitation, privilege escalation, findings, remediation, and full evidence appendices with 42 annotated screenshots. |
-| 📊 | [`Executive_Report.pdf`](Executive_Report.pdf) | **Executive Summary** — 3-page non-technical leadership briefing summarising the outcome, business risks, and recommended immediate actions. |
-| 📋 | [`Risk_Register.pdf`](Risk_Register.pdf) | **Risk Register** — 7 confirmed findings documented with Likelihood × Impact scoring, technical descriptions, and recommended controls in a card-per-finding layout. |
-| 📝 | [`Lessons_Learned.pdf`](Lessons_Learned.pdf) | **Lessons-Learned Statement** — Reflective analysis covering key technical insights, 7 documented failed hypotheses, and improvements for future operations. |
-| ✅ | [`ROE_Acknowledgement.pdf`](ROE_Acknowledgement.pdf) | **Rules of Engagement Acknowledgement** — Signed compliance record confirming adherence to all operational boundaries and the pre-operation checklist. |
-| 🖼️ | [`network_topology.jpg`](network_topology.jpg) | **Lab Network Topology Diagram** — Visual representation of the isolated VMnet1 Host-Only subnet architecture. |
-| 🖼️ | [`attack_chain.jpg`](attack_chain.jpg) | **Attack Kill Chain Diagram** — 7-phase attack path from unauthenticated enumeration to OS root compromise. |
+| Operational Area | CTF 1: Operation Iron Raven | CTF 2: Operation Black Forge |
+|:-----------------|:-----------------------------|:------------------------------|
+| **Target Host** | `OPFOR-01` (192.168.233.129) | `OPFOR-02` (192.168.233.130) |
+| **Operating System** | Debian Jessie Linux | PCLinuxOS 2011 (Linux 2.6.38) |
+| **Primary Vectors** | PHPMailer 5.2.16 RCE (CVE-2016-10033) | OpenEMR 4.1.0 Blind SQLi (EDB-49742) |
+| **Foothold Service** | Apache 2.4.10 / WordPress / Contact Form | Apache 2.2.17 / OpenEMR Healthcare Portal |
+| **Credential Vectors** | MySQL Database Hash Extraction | SQLi Dump `openemr.users` & MD5 Cracking |
+| **Code Execution** | Python Exploit (EDB-40974) \u2192 Web Shell | OpenEMR `config.php` Admin File Editor \u2192 Reverse Shell |
+| **Privilege Escalation**| MySQL User-Defined Function (UDF) & SUID `find` | SUID Binary Relative Call (PATH Environment Hijacking) |
+| **Compromise Level** | **Full Root Shell (`root@raven`)** | **Full Root Shell (`root@localhost`)** |
+| **Mission Proofs** | 4/4 Flags Captured (`flag1` \u2013 `flag4`) | Root Proof Hash (`eaff25eaa9ffc8b62e3dfebf70e83a7b`) |
+| **Folder Link** | [📂 View CTF-01 Directory](./CTF-01_Operation-Iron-Raven/) | [📂 View CTF-02 Directory](./CTF-02_Operation-Black-Forge/) |
 
 ---
 
-## 🔗 Attack Chain
+## 🗂️ Project Directory Structure
 
+```text
+Offensive-Security-Operations-II/
+│
+├── 📁 CTF-01_Operation-Iron-Raven/
+│   ├── 📄 Operation_Iron_Raven_Report.pdf     # 83-Page Full Technical Report (12 Sections)
+│   ├── 📊 Executive_Report.pdf                # Executive Leadership Briefing
+│   ├── 📋 Risk_Register.pdf                   # 7 Confirmed Findings (Card-per-finding format)
+│   ├── 📝 Lessons_Learned.pdf                 # Reflective Technical & Operational Analysis
+│   ├── 📜 ROE_Acknowledgement.pdf             # Signed Rules of Engagement Compliance Record
+│   ├── 🖼️ network_topology.jpg                # Isolated VMnet1 Subnet Architecture
+│   ├── 🖼️ attack_chain.jpg                    # 7-Phase Attack Kill Chain Diagram
+│   └── 📖 README.md                           # Detailed CTF-01 Technical Overview & Flags
+│
+├── 📁 CTF-02_Operation-Black-Forge/
+│   ├── 📄 Operation_Black_Forge_Report.pdf    # 50-Page Full Technical Report (12 Sections)
+│   ├── 📊 Executive_Report.pdf                # Executive Leadership Briefing
+│   ├── 📋 Risk_Register.pdf                   # 6 Confirmed Findings (Card-per-finding format)
+│   ├── 📝 Lessons_Learned.pdf                 # Reflective Technical & Operational Analysis
+│   ├── 🖼️ network_topology.jpg                # Isolated VirtualBox Host-Only Subnet Architecture
+│   ├── 🖼️ attack_chain.jpg                    # 7-Phase Attack Kill Chain Diagram
+│   └── 📖 README.md                           # Detailed CTF-02 Technical Overview & Root Proof
+│
+└── 📖 README.md                               # Master Repository Index & Course Portfolio
 ```
- ┌─────────────┐    ┌─────────────┐    ┌────────────────┐    ┌──────────────┐
- │    RECON     │───▶│ ENUMERATION │───▶│  VULN ANALYSIS │───▶│INITIAL ACCESS│
- │  nmap scan   │    │  Gobuster   │    │ PHPMailer 5.2.16│    │  EDB-40974   │
- │  Host found  │    │  /vendor/   │    │ CVE-2016-10033 │    │  Rev shell   │
- └─────────────┘    └─────────────┘    └────────────────┘    └──────┬───────┘
-                                                                    │
- ┌─────────────┐    ┌─────────────┐    ┌────────────────┐          │
- │    ROOT     │◀───│  PRIV ESC   │◀───│POST-EXPLOIT    │◀─────────┘
- │  whoami:root │    │ SUID find   │    │ wp-config.php  │
- │  4/4 Flags  │    │ UDF inject  │    │ MySQL as root  │
- └─────────────┘    └─────────────┘    └────────────────┘
+
+---
+
+## 🎯 Core Competencies Demonstrated
+
+- **Disciplined Network Enumeration**: Host discovery and port fingerprinting using `nmap`, `arp-scan`, `fping`, and custom protocol probes within strict network boundaries.
+- **Web Application Penetration Testing**: Deep directory enumeration (`dirb`, `gobuster`), parameter vulnerability testing, and exploitation of both remote code execution (PHPMailer) and structured injection (Blind SQL Injection via `sqlmap`).
+- **Cryptanalytic Assessment**: Offline hash identification, parsing using Unix pipeline utilities (`awk`, `column`), and dictionary/rainbow-table decryption of password digests.
+- **Post-Exploitation & Linux Internal Auditing**: File system permission auditing, administrative portal pivoting, weaponisation of built-in application configuration utilities, and environment profiling.
+- **Privilege Escalation**: Exploitation of misconfigured SUID binaries via Unix `PATH` variable manipulation and shared object injection (MySQL UDF dynamic libraries).
+- **Professional Reporting & Risk Management**: Publication of executive briefings, technical write-ups, and risk registers aligned with industry standards (CVSS scoring, actionable remediation roadmaps).
+
+---
+
+## ⚖️ Academic Integrity & Disclaimer
+
+All testing conducted and documented within this repository was performed strictly under an authorised Academic Rules of Engagement (ROE) charter issued by the **Directorate of Training, ICDFA Academy**. 
+
+- All target appliances operated within private, non-routable virtual segments (`192.168.233.0/24`).
+- No public networks, production infrastructures, or unapproved third-party systems were engaged.
+- Sensitive authentication secrets and user hashes have been redacted in public report documentation where appropriate.
+
+```text
+"Think before you act. Verify before you claim. Preserve evidence. Remain inside scope. Complete the mission without being given the path."
 ```
 
 ---
 
-## 🏁 Mission Objectives
-
-All four flags were successfully recovered:
-
-| Flag | Location | Access Level Required | Method |
-|:----:|:---------|:---------------------:|:-------|
-| **Flag 1** | `/var/www/html/vendor/PATH` | Unauthenticated | Directory listing enumeration |
-| **Flag 2** | `/var/www/flag2.txt` | `www-data` | Reverse shell filesystem access |
-| **Flag 3** | `wp-content/uploads/2018/11/flag3.png` | `www-data` | WordPress uploads directory traversal |
-| **Flag 4** | `/root/flag4.txt` | `root` | SUID privilege escalation via `find` |
-
----
-
-## 🔍 Confirmed Findings
-
-| ID | Vulnerability | Severity | Risk Score |
-|:--:|:-------------|:--------:|:----------:|
-| FIND-01 | Insecure Directory Listing — `/vendor/` Exposed | 🟡 **Medium** | 40/100 |
-| FIND-02 | PHPMailer 5.2.16 RCE — CVE-2016-10033 | 🔴 **Critical** | 100/100 |
-| FIND-03 | Cleartext Database Credentials in `wp-config.php` | 🟠 **High** | 81/100 |
-| FIND-04 | WordPress User Password Hashes Accessible | 🟠 **High** | 64/100 |
-| FIND-05 | MySQL Service Running as OS `root` | 🔴 **Critical** | 100/100 |
-| FIND-06 | MySQL UDF Injection — Arbitrary Command Execution | 🔴 **Critical** | 90/100 |
-| FIND-07 | SUID `find` Binary — Root Shell Escalation | 🔴 **Critical** | 100/100 |
-
----
-
-## 🌐 Lab Architecture
-
 <p align="center">
-  <img src="network_topology.jpg" alt="Lab Network Topology" width="85%"/>
-</p>
-
-| Component | Details |
-|:----------|:--------|
-| **Attacker** | Kali Linux — `192.168.233.128` (eth1) |
-| **Target** | OPFOR-01 / Debian Jessie — `192.168.233.129` |
-| **Network** | VMnet1 Host-Only — `192.168.233.0/24` |
-| **Isolation** | No internet route · No bridged adapters |
-
----
-
-## 🛠️ Tools & Techniques
-
-| Phase | Tools Used |
-|:------|:-----------|
-| Reconnaissance | `nmap`, `netdiscover` |
-| Enumeration | `Gobuster`, `DirBuster`, manual HTTP browsing |
-| Vulnerability Research | Exploit-DB, CVE databases, version fingerprinting |
-| Exploitation | EDB-ID 40974 (Python), `nc` reverse shell listener |
-| Post-Exploitation | `cat`, `find`, `mysql` CLI, manual filesystem traversal |
-| Privilege Escalation | MySQL UDF injection (`1518.so`), SUID `find` binary abuse |
-
----
-
-## 📌 Key Takeaways
-
-- **Enumeration depth is decisive** — discovering `/vendor/VERSION` reduced an open-ended search to a single high-confidence attack vector in under 10 minutes.
-- **Compounding misconfigurations amplify risk non-linearly** — neither the PHPMailer RCE alone nor the MySQL root misconfiguration alone would have enabled full compromise; together they formed a devastating chain.
-- **Failed hypotheses are valuable data** — 7 approaches were tested and explicitly falsified, demonstrating systematic methodology over trial-and-error.
-- **Staging infrastructure must be verified** — three failed `wget` attempts before the HTTP server was running were avoidable with a pre-flight checklist.
-
----
-
-## ⚠️ Disclaimer
-
-This penetration test was conducted as part of an **authorised academic exercise** under strict Rules of Engagement. All activities were performed within an **isolated virtual lab environment** with no connection to production systems or the public internet. This repository is published for educational and assessment purposes only.
-
-> **Classification:** Training Use Only
-
----
-
-<p align="center">
-  <b>Daniyal Ahmed</b> · C11/26/EHIT/17331<br/>
+  <b>Daniyal Ahmed</b> · Registration: <code>C11/26/EHIT/17331</code><br/>
   Offensive Security Operations II · CIP-A105 · September 2026
 </p>
